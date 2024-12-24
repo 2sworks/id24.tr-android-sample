@@ -35,6 +35,8 @@ class MainActivity : AppCompatActivity() {
             .setVideoRecordTime(5000)
             .setCallConnectionTimeOut(5000)
             .setAutoSelfieWithLivenessDetection(false)
+            .setEnablePDFInAddress(true)
+            .setPDFMaxFileSizeInAddress(5120)   // max 5 MB
             .setEnableFaceControlInSelfie(true)
             .setEnableLightInformationInCall(true)
             .build()
