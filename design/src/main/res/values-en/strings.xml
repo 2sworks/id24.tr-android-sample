@@ -109,6 +109,11 @@
     <string name="direct_call_wait">Click to skip the preliminary stages and connect to the customer representative.</string>
     <string name="call_info_desc">Our customer representative will call you as soon as possible and perform the identity verification process. During this time, make sure you are alone in the room, with your ID with you and ready, without closing this screen.</string>
     <string name="take_photo">Take Photo</string>
+    <string name="add_photo_pdf">Add Photo or PDF</string>
+    <string name="add_photo_pdf_photo">Take a Photo</string>
+    <string name="add_photo_pdf_pdf">Pick a PDF</string>
+    <string name="add_photo_pdf_convert_error">There was an error while processing PDF.</string>
+    <string name="add_photo_pdf_size_error">You have uploaded a PDF that exceeds the maximum size. Please upload PDF with a maximum size of %1$s.</string>
     <string name="finish_vitality_process">You have completed the vitality check, Thank you...</string>
     <string name="id_card_front_side">Please place your ID card on a dark background and take a photo of it in a frame.</string>
     <string name="id_card_back_side">Please place your ID card on a dark background and take a photo of it in a frame.</string>
@@ -119,6 +124,13 @@
     <string name="speech_desc">Press and hold the microphone,
 say the word in the picture</string>
     <string name="liveness_description">At this stage, the vitality check will be carried out. Complete the steps by reading the instructions.</string>
+    <string name="liveness_recording_uploading">Liveness recording is uploading, please wait.</string>
+    <string name="liveness_recording_not_started">Screen recording is required for the Vitality Control step to comply with the latest regulations. Please enable it to proceed.</string>
+    <string name="liveness_recording_unable_to_start">There was an error starting screen recording. Please try again.</string>
+    <string name="liveness_recording_file_not_found">Vitality recording not found. The process needs to be carried out again from the beginning.</string>
+    <string name="liveness_recording_failed_to_upload">There was an error uploading the recording. Please check your internet connection and try again.</string>
+    <string name="liveness_recording_file_too_large">Recording file is too large. The process needs to be carried out again from the beginning.</string>
+    <string name="liveness_recording_interrupted">Vitality recording was interrupted. The process needs to be carried out again from the beginning.</string>
     <string name="now_speech">You can read now.</string>
     <string name="wrong_text_pls_try">Wrong word. Please try again...</string>
     <string name="speech_info_desc">For determination of vitality, please say the word you see in the picture by holding down the button.</string>

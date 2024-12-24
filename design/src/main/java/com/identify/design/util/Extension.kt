@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment
 import com.airbnb.lottie.LottieDrawable
 import com.identify.design.dialogs.InformationDialogFragment
 import com.identify.design.dialogs.ProgressDialogFragment
+import com.identify.design.dialogs.ProgressWithTextDialogFragment
 import kotlin.math.max
 import kotlin.math.min
 import kotlin.math.roundToInt
@@ -54,6 +55,30 @@ fun Fragment.hideProgressDialog(){
 
 fun Fragment.isProgressShowing() = if(isAdded){
     childFragmentManager.findFragmentByTag(ProgressDialogFragment::class.java.toString()) != null
+}
+else{
+    true
+}
+
+fun Fragment.showProgressWithTextDialog(text: String) {
+    if(!isProgressWithTextShowing()){
+        val fragment = ProgressWithTextDialogFragment.newInstance(text)
+        this.childFragmentManager.beginTransaction().add(fragment,ProgressWithTextDialogFragment::class.java.toString()).commitAllowingStateLoss();
+    }
+}
+
+fun Fragment.hideProgressWithTextDialog(){
+    if(isAdded){
+        childFragmentManager.findFragmentByTag(ProgressWithTextDialogFragment::class.java.toString())?.let {
+            if(it is ProgressWithTextDialogFragment){
+                it.dismissAllowingStateLoss()
+            }
+        }
+    }
+}
+
+fun Fragment.isProgressWithTextShowing() = if(isAdded){
+    childFragmentManager.findFragmentByTag(ProgressWithTextDialogFragment::class.java.toString()) != null
 }
 else{
     true

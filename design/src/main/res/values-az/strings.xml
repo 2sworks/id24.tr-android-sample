@@ -67,6 +67,13 @@
     <string name="go_on">Davam et</string>
     <string name="smiling_text">Güclü bir gülümsəmə ilə davam edə bilərsiniz.</string>
     <string name="liveness_description">Bu addımda canlılıq kontrolü aparılacaq. Yönləndirmələri oxuyaraq addımları tamamlayın.</string>
+    <string name="liveness_recording_uploading">Canlılıq yazısı yüklənir, zəhmət olmasa gözləyin.</string>
+    <string name="liveness_recording_not_started">Ən son qaydalara uyğun olmaq üçün Canlılıq Nəzarəti addımı üçün ekran yazısı tələb olunur. Davam etmək üçün zəhmət olmasa bunu aktiv edin.</string>
+    <string name="liveness_recording_unable_to_start">Ekran qeydini başlatmaqda bir xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.</string>
+    <string name="liveness_recording_file_not_found">Canlılıq yazısı tapılmadı. Proses yenidən əvvəldən həyata keçirilməlidir.</string>
+    <string name="liveness_recording_failed_to_upload">Yazını yükləyərkən bir səhv baş verdi. Zəhmət olmasa internet bağlantınızı yoxlayın və yenidən cəhd edin.</string>
+    <string name="liveness_recording_file_too_large">Qeyd faylı çox böyükdür. Prosesə yenidən əvvəldən başlamaq lazımdır.</string>
+    <string name="liveness_recording_interrupted">Canlılıq qeydi kəsildi. Proses yenidən əvvəlcədən başlamaq lazımdır.</string>
     <string name="smiling_text_content">Bu addımda gülümsəyərək davam edə bilərsiniz.</string>
     <string name="blink_text">Canlılığı təyin etmək üçün göz qırpmaq lazımdır...</string>
     <string name="redirect_to_customer_services">Canlılıq kontrolü tamamlandı.</string>
@@ -108,6 +115,11 @@
     <string name="with_id_card">Kimlik kartınızla</string>
     <string name="direct_call_wait">1 mərhələni atlayaraq müştəri təmsilçisinə bağlan</string>
     <string name="take_photo">Şəkil çək</string>
+    <string name="add_photo_pdf">Şəkil və ya PDF əlavə et</string>
+    <string name="add_photo_pdf_photo">Şəkil çəkin</string>
+    <string name="add_photo_pdf_pdf">PDF seçin</string>
+    <string name="add_photo_pdf_convert_error">PDF işlənərkən bir səhv baş verdi.</string>
+    <string name="add_photo_pdf_size_error">Siz maksimum ölçünü keçən bir PDF yüklədiniz. Zəhmət olmasa, maksimum %1$s ölçüsündə bir PDF yükləyin.</string>
     <string name="record_video">Video çək</string>
     <string name="record_video_desc">Kimlik təyinatı üçün zəhmət olmasa üzünüzü çərçivənin içinə gətirərək 5 saniyə video çəkin və təsdiq edin.</string>
     <string name="id_card_front_side">Zəhmət olmasa kimlik kartınızı açıq bir fon üzərinə qoyun və çərçivə içində fotoşəkil çəkin.</string>

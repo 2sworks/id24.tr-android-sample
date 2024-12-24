@@ -109,6 +109,11 @@
     <string name="direct_call_wait">Нажмите, чтобы пропустить предварительные этапы и связаться с представителем клиента.</string>
     <string name="call_info_desc">Наш представитель клиента позвонит вам как можно скорее и выполнит процесс проверки личности. В это время убедитесь, что вы одни в комнате, с вашим удостоверением личности с вами и готовыми, не закрывая этот экран.</string>
     <string name="take_photo">Сделать фотографию</string>
+    <string name="add_photo_pdf">Добавить фото или PDF</string>
+    <string name="add_photo_pdf_photo">Сделать фото</string>
+    <string name="add_photo_pdf_pdf">Выбрать PDF</string>
+    <string name="add_photo_pdf_convert_error">Произошла ошибка при обработке PDF.</string>
+    <string name="add_photo_pdf_size_error">Вы загрузили PDF, размер которого превышает максимально допустимый. Пожалуйста, загрузите PDF размером не более %1$s.</string>
     <string name="finish_vitality_process">Вы завершили проверку живости, Спасибо...</string>
     <string name="id_card_front_side">Пожалуйста, поместите ваше удостоверение личности на темный фон и сделайте снимок в кадре.</string>
     <string name="id_card_back_side">Пожалуйста, поместите ваше удостоверение личности на темный фон и сделайте снимок в кадре.</string>
@@ -118,6 +123,13 @@
     <string name="pls_take_selfie">Для идентификации, пожалуйста, поместите ваше лицо в кадр, чтобы сделать фотографию и подтвердить.</string>
     <string name="speech_desc">Нажмите и удерживайте микрофон, произнесите слово на картинке</string>
     <string name="liveness_description">На этом этапе будет выполнена проверка живости. Завершите шаги, прочитав инструкции.</string>
+    <string name="liveness_recording_not_started">Для шага контроля жизнеспособности требуется запись экрана, чтобы соответствовать последним правилам. Пожалуйста, включите её, чтобы продолжить.</string>
+    <string name="liveness_recording_unable_to_start">Произошла ошибка при запуске записи экрана. Пожалуйста, попробуйте еще раз.</string>
+    <string name="liveness_recording_uploading">Запись живости загружается, пожалуйста, подождите.</string>
+    <string name="liveness_recording_file_not_found">Запись жизнеспособности не найдена. Процесс нужно выполнить снова с самого начала.</string>
+    <string name="liveness_recording_failed_to_upload">Произошла ошибка при загрузке записи. Пожалуйста, проверьте подключение к интернету и попробуйте снова.</string>
+    <string name="liveness_recording_file_too_large">Файл записи слишком большой. Процесс нужно начать заново с самого начала.</string>
+    <string name="liveness_recording_interrupted">Запись жизнеспособности была прервана. Процесс необходимо начать заново с самого начала.</string>
     <string name="now_speech">Теперь вы можете прочитать.</string>
     <string name="wrong_text_pls_try">Неправильное слово. Пожалуйста, попробуйте еще раз...</string>
     <string name="speech_info_desc">Для определения живости, пожалуйста, произнесите слово, которое вы видите на картинке, удерживая кнопку.</string>

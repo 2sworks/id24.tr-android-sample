@@ -5,6 +5,8 @@ import com.identify.design.R
 import com.identify.design.dialogs.InformationDialogFragment
 import com.identify.sdk.face.BaseLivenessDetectionModuleFragment
 import com.identify.sdk.repository.model.enums.IdentifyInformationTypes
+import com.identify.design.util.hideProgressWithTextDialog
+import com.identify.design.util.showProgressWithTextDialog
 
 class LivenessDetectionModuleFragment : BaseLivenessDetectionModuleFragment() {
 
@@ -22,13 +24,50 @@ class LivenessDetectionModuleFragment : BaseLivenessDetectionModuleFragment() {
 
     override fun getFragmentContainer(): Int  = R.id.livenessContainer
 
+    override fun showRecordingUploadIndicator() {
+        showProgress()
+    }
+
+    override fun hideRecordingUploadIndicator() {
+        hideProgress()
+    }
+
+    override fun getRecordingNotStartedErrorMessage(): String {
+        return getString(R.string.liveness_recording_not_started)
+    }
+
+    override fun getRecordingUnableToStartErrorMessage(): String {
+        return getString(R.string.liveness_recording_unable_to_start)
+    }
+
+    override fun getRecordingNotFoundErrorMessage(): String {
+        return getString(R.string.liveness_recording_file_not_found)
+    }
+
+    override fun getRecordingFailedToUploadErrorMessage(): String {
+        return getString(R.string.liveness_recording_failed_to_upload)
+    }
+
+    override fun getRecordingFileTooLarge(): String {
+        return getString(R.string.liveness_recording_file_too_large)
+    }
+
+    override fun getRecordingWasInterruptedMessage(): String {
+        return getString(R.string.liveness_recording_interrupted)
+    }
+
     override fun getLayoutRes(): Int = R.layout.fragment_liveness_module
-
-
-
 
     companion object {
         @JvmStatic
         fun newInstance() = LivenessDetectionModuleFragment()
+    }
+
+    private fun showProgress() {
+        this.showProgressWithTextDialog(getString(R.string.liveness_recording_uploading))
+    }
+
+    private fun hideProgress() {
+        this.hideProgressWithTextDialog()
     }
 }

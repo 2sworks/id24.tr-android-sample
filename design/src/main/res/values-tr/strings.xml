@@ -67,6 +67,13 @@
     <string name="go_on">Devam Et</string>
     <string name="smiling_text">Güçlü bir gülümseme ile devam edebilirsiniz.</string>
     <string name="liveness_description">Bu aşamada canlılık kontrolü yapılacaktır. Yönergeleri okuyarak adımları tamamlayınız.</string>
+    <string name="liveness_recording_uploading">Canlılık kaydı yükleniyor, lütfen bekleyin.</string>
+    <string name="liveness_recording_not_started">En son düzenlemelere uymak için Canlılık Kontrolü adımı için ekran kaydı gereklidir. Devam etmek için lütfen bunu etkinleştirin.</string>
+    <string name="liveness_recording_unable_to_start">Ekran kaydı başlatılırken bir hata oluştu. Lütfen tekrar deneyin.</string>
+    <string name="liveness_recording_file_not_found">Canlılık kaydı bulunamadı. İşlem en baştan tekrar gerçekleştirilmelidir.</string>
+    <string name="liveness_recording_failed_to_upload">Kaydı yüklerken bir hata oluştu. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.</string>
+    <string name="liveness_recording_file_too_large">Kayıt dosyası çok büyük. İşlem baştan başlamalıdır.</string>
+    <string name="liveness_recording_interrupted">Die Vitalitätsaufzeichnung wurde unterbrochen. Der Vorgang muss von Anfang an erneut durchgeführt werden.</string>
     <string name="smiling_text_content">Bu adımda gülümseyerek devam edebilirsiniz.</string>
     <string name="blink_text">Canlılığı tespit etmek için göz kırpmalısınız...</string>
     <string name="redirect_to_customer_services">Canlılık kontrolü tamamlandı.</string>
@@ -108,6 +115,11 @@
     <string name="with_id_card">Kimlik Kartı ile</string>
     <string name="direct_call_wait">Ön aşamaları atlayıp müşteri temsilcisine bağlan</string>
     <string name="take_photo">Fotoğraf Çek</string>
+    <string name="add_photo_pdf">Fotoğraf veya PDF Ekle</string>
+    <string name="add_photo_pdf_photo">Fotoğraf Çek</string>
+    <string name="add_photo_pdf_pdf">PDF Seç</string>
+    <string name="add_photo_pdf_convert_error">PDF işlenirken bir hata oluştu.</string>
+    <string name="add_photo_pdf_size_error">Maksimum boyutu aşan bir PDF yüklediniz. Lütfen en fazla %1$s boyutunda bir PDF yükleyin.</string>
     <string name="record_video">Video Çek</string>
     <string name="record_video_desc">Kimlik tespiti için lütfen yüzünüzü çerçevenin içine getirerek 5 saniye video çekin ve onaylayın.</string>
     <string name="id_card_front_side">Lütfen kimlik kartınızı koyu bir zemin üzerine koyup çerçeve içerisinde fotoğrafını çekiniz.</string>

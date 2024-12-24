@@ -54,12 +54,13 @@
     <TextView
         android:id="@+id/textView3"
         style="@style/TextAppearance.AppCompat.Title"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:text="@string/address_desc"
         android:textColor="@android:color/white"
         android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
@@ -77,13 +78,14 @@
         app:layout_constraintTop_toBottomOf="@+id/textView3">
 
         <TextView
+            android:id="@+id/cardTakePhotoViewTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imgBackground"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:fontFamily="@font/nexa_slab_bold"
-            android:text="@string/take_photo"
+            android:text="@string/add_photo_pdf"
             android:textColor="@color/colorDarkBlue"
             android:textSize="18sp" />
     </androidx.cardview.widget.CardView>

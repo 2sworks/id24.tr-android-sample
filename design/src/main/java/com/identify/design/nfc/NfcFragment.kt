@@ -107,6 +107,7 @@ class NfcFragment : BaseNfcFragment() {
                     is NfcUserError -> {
                         nfcFailProcess()
                         startFailUIProcess()
+                        showCheckIdentityInformationDialog() // eğer kullanıcı nfc okuturken kartı çekerse & mrz dataları hatalı gelip nfc error verirse tekrar düzenleme ekranını gösteriyoruz
                     }
                     is NfcWrongDataError -> {
                         nfcFailProcess()

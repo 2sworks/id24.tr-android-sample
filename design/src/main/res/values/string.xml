@@ -110,6 +110,11 @@
     <string name="choose_language">Sprache wählen</string>
     <string name="call_info_desc">Unser Kundenvertreter wird Sie so schnell wie möglich anrufen und den Identitätsprüfungsprozess durchführen. Stellen Sie während dieser Zeit sicher, dass Sie mit Ihrem Ausweis allein im Raum sind und bereit, ohne diesen Bildschirm zu schließen.</string>
     <string name="take_photo">Foto machen</string>
+    <string name="add_photo_pdf">Foto oder PDF hinzufügen</string>
+    <string name="add_photo_pdf_photo">Ein Foto aufnehmen</string>
+    <string name="add_photo_pdf_pdf">Eine PDF auswählen</string>
+    <string name="add_photo_pdf_convert_error">Beim Verarbeiten der PDF ist ein Fehler aufgetreten.</string>
+    <string name="add_photo_pdf_size_error">Sie haben eine PDF hochgeladen, die die maximale Größe überschreitet. Bitte laden Sie eine PDF mit einer maximalen Größe von %1$s hoch.</string>
     <string name="id_card_front_side">Bitte platzieren Sie Ihren Personalausweis vor einem dunklen Hintergrund und fotografieren Sie ihn in einem Rahmen.</string>
     <string name="id_card_back_side">Bitte platzieren Sie Ihren Personalausweis vor einem dunklen Hintergrund und fotografieren Sie ihn in einem Rahmen.</string>
     <string name="mrz_not_avaible_title">Nfc nicht gefunden</string>
@@ -118,6 +123,13 @@
     <string name="speech_desc">Halten Sie das Mikrofon gedrückt,
 sag das Wort auf dem Bild</string>
     <string name="liveness_description">In dieser Phase wird die Vitalitätsprüfung durchgeführt. Führen Sie die Schritte durch, indem Sie die Anweisungen lesen.</string>
+    <string name="liveness_recording_uploading">Die Liveness-Aufnahme wird hochgeladen, bitte warten.</string>
+    <string name="liveness_recording_not_started">Für den Vitalitätskontrollschritt ist eine Bildschirmaufnahme erforderlich, um die neuesten Vorschriften einzuhalten. Bitte aktivieren Sie diese, um fortzufahren.</string>
+    <string name="liveness_recording_unable_to_start">Beim Starten der Bildschirmaufnahme ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.</string>
+    <string name="liveness_recording_file_not_found">Vitalitätsaufnahme nicht gefunden. Der Vorgang muss erneut von Anfang an durchgeführt werden.</string>
+    <string name="liveness_recording_failed_to_upload">Beim Hochladen der Aufnahme ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</string>
+    <string name="liveness_recording_file_too_large">Die Aufnahmedatei ist zu groß. Der Vorgang muss von vorne begonnen werden.</string>
+    <string name="liveness_recording_interrupted">Die Vitalitätsaufzeichnung wurde unterbrochen. Der Vorgang muss von Anfang an erneut durchgeführt werden.</string>
     <string name="record_video">Nehmen Sie ein Video auf</string>
     <string name="record_video_desc">Zur Identifizierung bringen Sie bitte Ihr Gesicht in den Rahmen, um 5 Sekunden Video aufzunehmen und zu bestätigen.</string>
     <string name="now_speech">Du kannst jetzt reden.</string>
