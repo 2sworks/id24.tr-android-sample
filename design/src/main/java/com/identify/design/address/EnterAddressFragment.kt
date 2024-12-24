@@ -10,10 +10,6 @@ import com.identify.design.util.showProgressDialog
 import com.identify.sdk.SdkApp
 import com.identify.sdk.address.BaseEnterAddressFragment
 import com.identify.sdk.base.viewBinding.viewBinding
-import kotlinx.android.synthetic.main.fragment_enter_address.cardTakePhotoView
-import kotlinx.android.synthetic.main.fragment_enter_address.textView3
-import kotlinx.android.synthetic.main.fragment_enter_address.view.textView2
-import kotlinx.android.synthetic.main.fragment_enter_address.view.textView3
 
 class EnterAddressFragment : BaseEnterAddressFragment() {
 
