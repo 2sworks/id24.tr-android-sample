@@ -124,6 +124,7 @@
     <string name="speech_desc">Нажмите и удерживайте микрофон, произнесите слово на картинке</string>
     <string name="liveness_description">На этом этапе будет выполнена проверка живости. Завершите шаги, прочитав инструкции.</string>
     <string name="liveness_recording_not_started">Для шага контроля жизнеспособности требуется запись экрана, чтобы соответствовать последним правилам. Пожалуйста, включите её, чтобы продолжить.</string>
+    <string name="liveness_recording_not_supported">Запись экрана не поддерживается на этом устройстве. Шаг проверки живости не может быть продолжен.</string>
     <string name="liveness_recording_unable_to_start">Произошла ошибка при запуске записи экрана. Пожалуйста, попробуйте еще раз.</string>
     <string name="liveness_recording_uploading">Запись живости загружается, пожалуйста, подождите.</string>
     <string name="liveness_recording_file_not_found">Запись жизнеспособности не найдена. Процесс нужно выполнить снова с самого начала.</string>

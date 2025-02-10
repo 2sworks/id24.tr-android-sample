@@ -125,6 +125,7 @@ sag das Wort auf dem Bild</string>
     <string name="liveness_description">In dieser Phase wird die Vitalitätsprüfung durchgeführt. Führen Sie die Schritte durch, indem Sie die Anweisungen lesen.</string>
     <string name="liveness_recording_uploading">Die Liveness-Aufnahme wird hochgeladen, bitte warten.</string>
     <string name="liveness_recording_not_started">Für den Vitalitätskontrollschritt ist eine Bildschirmaufnahme erforderlich, um die neuesten Vorschriften einzuhalten. Bitte aktivieren Sie diese, um fortzufahren.</string>
+    <string name="liveness_recording_not_supported">Die Bildschirmaufnahme wird auf diesem Gerät nicht unterstützt. Der Liveness-Schritt kann nicht fortgesetzt werden.</string>
     <string name="liveness_recording_unable_to_start">Beim Starten der Bildschirmaufnahme ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.</string>
     <string name="liveness_recording_file_not_found">Vitalitätsaufnahme nicht gefunden. Der Vorgang muss erneut von Anfang an durchgeführt werden.</string>
     <string name="liveness_recording_failed_to_upload">Beim Hochladen der Aufnahme ist ein Fehler aufgetreten. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.</string>

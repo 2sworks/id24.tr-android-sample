@@ -69,6 +69,7 @@
     <string name="liveness_description">Bu aşamada canlılık kontrolü yapılacaktır. Yönergeleri okuyarak adımları tamamlayınız.</string>
     <string name="liveness_recording_uploading">Canlılık kaydı yükleniyor, lütfen bekleyin.</string>
     <string name="liveness_recording_not_started">En son düzenlemelere uymak için Canlılık Kontrolü adımı için ekran kaydı gereklidir. Devam etmek için lütfen bunu etkinleştirin.</string>
+    <string name="liveness_recording_not_supported">Ekran kaydı bu cihazda desteklenmiyor. Canlılık adımı devam ettirilemez.</string>
     <string name="liveness_recording_unable_to_start">Ekran kaydı başlatılırken bir hata oluştu. Lütfen tekrar deneyin.</string>
     <string name="liveness_recording_file_not_found">Canlılık kaydı bulunamadı. İşlem en baştan tekrar gerçekleştirilmelidir.</string>
     <string name="liveness_recording_failed_to_upload">Kaydı yüklerken bir hata oluştu. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.</string>

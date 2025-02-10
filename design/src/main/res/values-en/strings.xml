@@ -126,6 +126,7 @@ say the word in the picture</string>
     <string name="liveness_description">At this stage, the vitality check will be carried out. Complete the steps by reading the instructions.</string>
     <string name="liveness_recording_uploading">Liveness recording is uploading, please wait.</string>
     <string name="liveness_recording_not_started">Screen recording is required for the Vitality Control step to comply with the latest regulations. Please enable it to proceed.</string>
+    <string name="liveness_recording_not_supported">Screen recording is not supported on this device. Liveness step cannot continue.</string>
     <string name="liveness_recording_unable_to_start">There was an error starting screen recording. Please try again.</string>
     <string name="liveness_recording_file_not_found">Vitality recording not found. The process needs to be carried out again from the beginning.</string>
     <string name="liveness_recording_failed_to_upload">There was an error uploading the recording. Please check your internet connection and try again.</string>

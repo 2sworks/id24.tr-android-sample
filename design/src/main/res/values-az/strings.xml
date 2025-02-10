@@ -69,6 +69,7 @@
     <string name="liveness_description">Bu addımda canlılıq kontrolü aparılacaq. Yönləndirmələri oxuyaraq addımları tamamlayın.</string>
     <string name="liveness_recording_uploading">Canlılıq yazısı yüklənir, zəhmət olmasa gözləyin.</string>
     <string name="liveness_recording_not_started">Ən son qaydalara uyğun olmaq üçün Canlılıq Nəzarəti addımı üçün ekran yazısı tələb olunur. Davam etmək üçün zəhmət olmasa bunu aktiv edin.</string>
+    <string name="liveness_recording_not_supported">Ekran yazdırılması bu cihazda dəstəklənmir. Canlılıq addımı davam etdirilə bilməz.</string>
     <string name="liveness_recording_unable_to_start">Ekran qeydini başlatmaqda bir xəta baş verdi. Zəhmət olmasa yenidən cəhd edin.</string>
     <string name="liveness_recording_file_not_found">Canlılıq yazısı tapılmadı. Proses yenidən əvvəldən həyata keçirilməlidir.</string>
     <string name="liveness_recording_failed_to_upload">Yazını yükləyərkən bir səhv baş verdi. Zəhmət olmasa internet bağlantınızı yoxlayın və yenidən cəhd edin.</string>
