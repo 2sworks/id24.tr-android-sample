@@ -2,7 +2,6 @@ package com.identify.design.liveness
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.CamcorderProfile
@@ -14,9 +13,7 @@ import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
-import android.util.DisplayMetrics
 import android.util.Log
-import android.view.WindowManager
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
@@ -30,6 +27,8 @@ import com.identify.sdk.face.BaseLivenessDetectionModuleFragment
 import com.identify.sdk.repository.model.enums.IdentifyInformationTypes
 import com.identify.design.util.hideProgressWithTextDialog
 import com.identify.design.util.showProgressWithTextDialog
+import com.identify.sdk.face.BaseLivenessDetectionFragment
+import com.identify.sdk.flowbreak.BaseFlowBreakFragment
 import com.identify.sdk.toasty.Toasty
 import java.io.File
 
@@ -43,6 +42,9 @@ class LivenessDetectionModuleFragment : BaseLivenessDetectionModuleFragment(), H
     private val REQUEST_CODE = 101
     private var isRecordingConfigured = true
     //////
+
+    // for SM-169
+    private var forceNextStep = false
 
     override fun getLivenessDetectionFragmentInstance(): Fragment? = LivenessDetectionFragment.newInstance()
 
@@ -149,11 +151,26 @@ class LivenessDetectionModuleFragment : BaseLivenessDetectionModuleFragment(), H
                 // Add slight delay before starting recording. I'm unsure why this is needed, but it works.
                 Handler(Looper.getMainLooper()).postDelayed({
                     hbRecorder?.startScreenRecording(result.data, result.resultCode)
+
+                    if (forceNextStep) {
+                        forceNextStep()
+                    }
+
                 }, 500) // 500ms delay
             } else {
                 Toasty.error(requireContext(), getRecordingNotStartedErrorMessage()).show()
             }
         }
+    }
+
+    private fun isBaseLivenessFragmentActive(): Boolean {
+        val fragment = childFragmentManager.findFragmentByTag(BaseLivenessDetectionFragment::class.java.toString())
+        return fragment != null && fragment.isAdded && fragment.isVisible
+    }
+
+    private fun forceNextStep() {
+        val fragment = childFragmentManager.findFragmentByTag(BaseFlowBreakFragment::class.java.toString()) as BaseFlowBreakFragment
+        fragment.finishInformationFlowBreak()
     }
 
     private fun configureRecording() {
@@ -281,6 +298,8 @@ class LivenessDetectionModuleFragment : BaseLivenessDetectionModuleFragment(), H
     // Permissions
 
     private fun launchScreenCaptureIntent() {
+        forceNextStep = isBaseLivenessFragmentActive()
+
         val mediaProjectionManager =
             getSystemService(context!!, MediaProjectionManager::class.java)
         val permissionIntent = mediaProjectionManager?.createScreenCaptureIntent()
