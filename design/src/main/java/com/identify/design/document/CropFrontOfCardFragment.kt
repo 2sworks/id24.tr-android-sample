@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.Gravity
 import android.view.MotionEvent
 import android.view.View
@@ -219,6 +220,7 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
         when(reason){
             is ApiError -> {
                 Toasty.error(requireContext(), reason.message?.get(0).toString(), Toasty.LENGTH_SHORT, true).show()
+                takePhotoAgain()
             }
             is ResponseError -> {
                 Toasty.error(requireContext(), getResponseErrorMessage(), Toasty.LENGTH_SHORT, true).show()

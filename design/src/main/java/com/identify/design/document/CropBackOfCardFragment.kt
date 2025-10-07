@@ -209,6 +209,7 @@ class CropBackOfCardFragment: BaseCropBackOfFragment() {
        when(reason){
            is ApiError -> {
                Toasty.error(requireContext(), reason.message?.get(0).toString(), Toasty.LENGTH_SHORT, true).show()
+               takePhotoAgain()
            }
            is ResponseError -> {
                Toasty.error(requireContext(), getResponseErrorMessage(), Toasty.LENGTH_SHORT, true).show()
