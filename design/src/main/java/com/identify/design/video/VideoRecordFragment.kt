@@ -25,6 +25,10 @@ class VideoRecordFragment : BaseVideoRecordFragment() {
         videoPreview = binding.videoPreviewView
         videoPlayer = binding.videoPlayerView
         tvSecond = binding.tvSecondView
+        seekBarVideo = binding.seekBarVideo
+        tvCurrentTime = binding.tvCurrentTime
+        tvTotalTime = binding.tvTotalTime
+        ivPlayPauseVideo = binding.ivPlayPauseVideo
 
 
         stopVideoSetup()

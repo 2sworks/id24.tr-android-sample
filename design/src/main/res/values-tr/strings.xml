@@ -193,5 +193,5 @@
     <string name="warning">Uyarı</string>
     <string name="skip_next_module">Bir sonraki modüle geçilecek</string>
 
-    <string name="comparison_error">Kimlik bilgileri karşılaştırma sonucu yanlış.</string>
+    <string name="comparison_error">Beyan ettiğiniz bilgilerle, kimliğinizdeki bilgiler uyuşmamaktadır. Lütfen doğru kimlikle işlem yaptığınızdan emin olunuz</string>
 </resources>

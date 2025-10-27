@@ -11,6 +11,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IdentifySampleApp"
         tools:targetApi="31">
+
+        <property
+            android:name="android.app.PROPERTY_COMPAT_ALLOW_SDK_LIBRARY_16KB_PAGES"
+            android:value="true" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

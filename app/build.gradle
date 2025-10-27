@@ -24,11 +24,25 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = "17"
+    }
+
+    packagingOptions {
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+    splits {
+        abi {
+            enable true
+            reset()
+            include "arm64-v8a", "x86_64"
+            universalApk false
+        }
     }
 }
 
@@ -42,4 +56,55 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+}
+
+
+// Task to align native libraries to 16KB page size using Python script
+android.applicationVariants.all { variant ->
+    def variantName = variant.name.capitalize()
+
+    // Create alignment task for each variant
+    def alignTask = tasks.register("align16KBLibs${variantName}") {
+        doLast {
+            def pythonScript = file("${rootProject.projectDir}/scripts/align_elf_segments.py")
+
+            if (!pythonScript.exists()) {
+                println "Warning: align_elf_segments.py not found, skipping alignment"
+                return
+            }
+
+            def nativeLibsDir = file("${buildDir}/intermediates/stripped_native_libs/${variant.name}/out/lib")
+
+            if (!nativeLibsDir.exists()) {
+                println "Native libs dir not found: ${nativeLibsDir}"
+                return
+            }
+
+            // Only align arm64-v8a and x86_64 (16KB relevant architectures)
+            ['arm64-v8a', 'x86_64'].each { abi ->
+                def abiDir = file("${nativeLibsDir}/${abi}")
+                if (abiDir.exists()) {
+                    abiDir.listFiles().findAll { it.name.endsWith('.so') }.each { soFile ->
+                        println "Aligning ${soFile.name} for ${abi} to 16KB page size..."
+                        try {
+                            exec {
+                                commandLine 'python3', pythonScript.absolutePath, soFile.absolutePath
+                            }
+                        } catch (Exception e) {
+                            println "Warning: Failed to align ${soFile.name}: ${e.message}"
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Run alignment after stripping debug symbols but before packaging
+    tasks.named("package${variantName}").configure {
+        dependsOn alignTask
+    }
+
+    tasks.named("strip${variantName}DebugSymbols").configure {
+        finalizedBy alignTask
+    }
 }
