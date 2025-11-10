@@ -69,13 +69,13 @@ class NfcFragment : BaseNfcFragment() {
 
                         when(reason){
                             is ResponseError -> {
-                                nfcFailProcess()
+                                nfcFailProcess(reason)
                                 getNfcFailToastMessage().let {
                                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                                 }
                             }
                             is ApiError -> {
-                                nfcFailProcess()
+                                nfcFailProcess(reason)
                                 getNfcFailToastMessage().let {
                                     Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                                 }
@@ -85,11 +85,11 @@ class NfcFragment : BaseNfcFragment() {
                                 if(getNfcComparisonCount() != 0) {
                                     getNfcComparisonErrorToastMessage().let { it1 -> Toasty.error(requireContext(), it1,Toasty.LENGTH_LONG).show() }
                                     declareNfcComparisonCount()
-                                    nfcFailProcess()
+                                    nfcFailProcess(reason)
                                     goCardPhotoModule()
                                 } else {
                                     getNfcVerificationFailToastMessage().let { it1 -> Toasty.error(requireContext(), it1,Toasty.LENGTH_LONG).show() }
-                                    nfcFailProcess()
+                                    nfcFailProcess(reason)
                                     goVerificationFailPage()
                                 }
                             }
@@ -105,12 +105,12 @@ class NfcFragment : BaseNfcFragment() {
             override fun onFailure(reason: Reason) {
                 when(reason){
                     is NfcUserError -> {
-                        nfcFailProcess()
+                        nfcFailProcess(reason)
                         startFailUIProcess()
                         showCheckIdentityInformationDialog() // eğer kullanıcı nfc okuturken kartı çekerse & mrz dataları hatalı gelip nfc error verirse tekrar düzenleme ekranını gösteriyoruz
                     }
                     is NfcWrongDataError -> {
-                        nfcFailProcess()
+                        nfcFailProcess(reason)
                         startFailUIProcess()
                         showCheckIdentityInformationDialog()
                     }

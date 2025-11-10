@@ -42,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 //            .setEnableLivenessWrongActionListener(true)
 //            .setStatusOfAutoCrop(true)
             //.setSecretKeyBase64("SEATSJ8kk0v8+A1LeQsAMbOgL+fSj9pOaUKI5cDMITU=")
+            //.setLoggerSecretKey("dGhpc19pc19qdXN0X2R1bW15X3NlY3JldF9mb3JfZGVtbw==")
             .build()
 
 

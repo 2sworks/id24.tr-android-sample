@@ -15,7 +15,7 @@ class CallWaitingFragment : BaseCallWaitingFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        disconnectSocketWhenAppOnBackground()
+        //disconnectSocketWhenAppOnBackground()
     }
 
     override fun setQueueMessage(numberOfMember: String, estimatedTime: String) {
