@@ -82,15 +82,19 @@ class NfcFragment : BaseNfcFragment() {
                             }
 
                             is ApiComparisonError -> {
+                                declareNfcComparisonCount()
                                 if(getNfcComparisonCount() != 0) {
                                     getNfcComparisonErrorToastMessage().let { it1 -> Toasty.error(requireContext(), it1,Toasty.LENGTH_LONG).show() }
-                                    declareNfcComparisonCount()
                                     nfcFailProcess(reason)
-                                    goCardPhotoModule()
+                                    //goCardPhotoModule()
                                 } else {
                                     getNfcVerificationFailToastMessage().let { it1 -> Toasty.error(requireContext(), it1,Toasty.LENGTH_LONG).show() }
                                     nfcFailProcess(reason)
-                                    goVerificationFailPage()
+                                    getACRStatus({
+                                        finishNfcModuleWithError()
+                                    },{
+                                        goVerificationFailPage()
+                                    })
                                 }
                             }
                         }

@@ -2,14 +2,18 @@ package com.identify.design.selfie
 
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.identify.design.R
 import com.identify.design.databinding.FragmentSelfieBinding
 import com.identify.design.util.hideProgressDialog
 import com.identify.design.util.showProgressDialog
+import com.identify.sdk.base.ApiComparisonError
+import com.identify.sdk.base.Reason
 import com.identify.sdk.base.viewBinding.viewBinding
 import com.identify.sdk.selfie.BaseSelfieFragment
+import com.identify.sdk.toasty.Toasty
 
 class SelfieFragment : BaseSelfieFragment() {
 
@@ -55,34 +59,38 @@ class SelfieFragment : BaseSelfieFragment() {
                 finishSelfieModule()
             }
 
-            override fun onFailure(reason: com.identify.sdk.base.Reason) {
+            override fun onFailure(reason: Reason) {
                 // Handle different error types
                 when(reason) {
-                    is com.identify.sdk.base.ApiComparisonError -> {
+                    is ApiComparisonError -> {
                         // Face comparison failed
                         // Customer can add custom logic here
+
+                        // Decrement retry count
+                        decrementRetryCount()
 
                         val remainingRetries = getRemainingRetryCount() ?: 0
 
                         if(remainingRetries != 0) {
                             // Still have retries left
                             getSelfieComparisonErrorToastMessage()?.let {
-                                com.identify.sdk.toasty.Toasty.error(requireContext(), it, com.identify.sdk.toasty.Toasty.LENGTH_LONG).show()
+                                Toasty.error(requireContext(), it, Toasty.LENGTH_LONG).show()
                             }
-
-                            // Decrement retry count
-                            decrementRetryCount()
 
                             // Restart capture
                             restartSelfieCapture()
                         } else {
                             // No retries left
                             getSelfieVerificationFailToastMessage()?.let {
-                                com.identify.sdk.toasty.Toasty.error(requireContext(), it, com.identify.sdk.toasty.Toasty.LENGTH_LONG).show()
+                                Toasty.error(requireContext(), it, Toasty.LENGTH_LONG).show()
                             }
 
-                            // Redirect to verification fail page
-                            redirectToVerificationFail()
+                            getACRStatus({
+                                finishSelfieModuleWithError()
+                            },{
+                                // Redirect to verification fail page
+                                redirectToVerificationFail()
+                            })
                         }
                     }
                     else -> {
