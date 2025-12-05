@@ -110,6 +110,7 @@ class CropBackOfCardFragment: BaseCropBackOfFragment() {
                     Toasty.error(requireContext(), errorMessage).show()
                 }
             }
+            else -> {}
         }
         takePhotoAgain()
     }

@@ -257,6 +257,7 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
                     Toasty.error(requireContext(), errorMessage).show()
                 }
             }
+            else -> {}
         }
         retakePhotoOnError()
     }

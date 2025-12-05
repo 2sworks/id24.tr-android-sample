@@ -74,7 +74,7 @@
     <string name="liveness_recording_file_not_found">Canlılık kaydı bulunamadı. İşlem en baştan tekrar gerçekleştirilmelidir.</string>
     <string name="liveness_recording_failed_to_upload">Kaydı yüklerken bir hata oluştu. Lütfen internet bağlantınızı kontrol edin ve tekrar deneyin.</string>
     <string name="liveness_recording_file_too_large">Kayıt dosyası çok büyük. İşlem baştan başlamalıdır.</string>
-    <string name="liveness_recording_interrupted">Die Vitalitätsaufzeichnung wurde unterbrochen. Der Vorgang muss von Anfang an erneut durchgeführt werden.</string>
+    <string name="liveness_recording_interrupted">Canlılık kaydı kesintiye uğradı. İşlemin baştan itibaren yeniden yapılması gerekiyor.</string>
     <string name="smiling_text_content">Bu adımda gülümseyerek devam edebilirsiniz.</string>
     <string name="blink_text">Canlılığı tespit etmek için göz kırpmalısınız...</string>
     <string name="redirect_to_customer_services">Canlılık kontrolü tamamlandı.</string>
