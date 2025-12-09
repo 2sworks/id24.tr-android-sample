@@ -26,6 +26,11 @@ class CallWaitingFragment : BaseCallWaitingFragment() {
 
     override fun changeStatusColor(): Int? = android.R.color.transparent
 
+    override fun onResume() {
+        super.onResume()
+        sendLocationToSocket()
+    }
+
 
     companion object {
 
