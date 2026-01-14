@@ -19,7 +19,12 @@ class CallWaitingFragment : BaseCallWaitingFragment() {
     }
 
     override fun setQueueMessage(numberOfMember: String, estimatedTime: String) {
-        binding.tvQueueView.text = String.format(getString(R.string.estimated_wait),estimatedTime,numberOfMember)
+        if (numberOfMember == "0" && estimatedTime == "0") {
+            binding.tvQueueView.text = getString(R.string.waiting_final_preparations)
+        } else {
+            binding.tvQueueView.text =
+                String.format(getString(R.string.estimated_wait), estimatedTime, numberOfMember)
+        }
     }
 
     override fun getLayoutRes(): Int = R.layout.fragment_waiting_call

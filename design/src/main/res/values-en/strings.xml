@@ -195,4 +195,7 @@ say the word in the picture</string>
     <string name="skip_next_module">Move to the next module</string>
 
     <string name="comparison_error">Identity information comparison result is incorrect.</string>
+
+    <string name="waiting_final_preparations">Our customer representative is making the final preparations to call you. Please wait without closing the app.</string>
+    <string name="photo_upload_limit_error">You can upload a maximum of 20 photos with this ident_id.</string>
 </resources>

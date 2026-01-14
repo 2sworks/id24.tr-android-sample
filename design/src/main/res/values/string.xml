@@ -195,4 +195,6 @@ sag das Wort auf dem Bild</string>
     <string name="skip_next_module">Fahren Sie mit dem nächsten Modul fort</string>
 
     <string name="comparison_error">Kimlik bilgileri karşılaştırma sonucu yanlış.</string>
+    <string name="waiting_final_preparations">Unser Kundenvertreter trifft die letzten Vorbereitungen, um Sie anzurufen. Bitte warten Sie, ohne die App zu schließen.</string>
+    <string name="photo_upload_limit_error">Sie können maximal 20 Fotos mit dieser ident_id hochladen.</string>
 </resources>

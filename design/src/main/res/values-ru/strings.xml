@@ -190,4 +190,6 @@
     <string name="skip_next_module">Начнется следующий модуль</string>
 
     <string name="comparison_error">Результат сравнения идентификационных данных неверный.</string>
+
+    <string name="waiting_final_preparations">Наш представитель клиента делает последние приготовления, чтобы позвонить вам. Пожалуйста, подождите, не закрывая приложение.</string>
 </resources>

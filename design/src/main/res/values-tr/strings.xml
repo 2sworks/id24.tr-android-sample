@@ -194,4 +194,7 @@
     <string name="skip_next_module">Bir sonraki modüle geçilecek</string>
 
     <string name="comparison_error">Beyan ettiğiniz bilgilerle, kimliğinizdeki bilgiler uyuşmamaktadır. Lütfen doğru kimlikle işlem yaptığınızdan emin olunuz</string>
+
+    <string name="waiting_final_preparations">Müşteri temsilcimiz sizi aramak için son hazırlıkları yapıyor. Lütfen uygulamayı kapatmadan bekleyin.</string>
+    <string name="photo_upload_limit_error">Bu ident_id ile maksimum 20 fotoğraf yükleyebilirsiniz.</string>
 </resources>

@@ -21,10 +21,12 @@ import com.identify.sdk.SdkApp
 import com.identify.sdk.base.*
 import com.identify.sdk.base.viewBinding.viewBinding
 import com.identify.sdk.document.BaseCropFrontOfCardFragment
+import com.identify.sdk.repository.model.SimpleErrorResponse
 import com.identify.sdk.repository.model.enums.CropErrorType
 import com.identify.sdk.scanner.*
 import com.identify.sdk.scanner.State
 import com.identify.sdk.toasty.Toasty
+import com.identify.sdk.util.ErrorBodyParser
 import com.identify.sdk.util.observe
 
 class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
@@ -52,42 +54,58 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
             binding.cropWrap.visibility = View.VISIBLE
 
             binding.cropWrap.doOnNextLayout {
-                getCorners(true, {
-                    binding.cropCornerDetector.onCorners(
-                        corners = it,
-                        height = binding.cropPreview.measuredHeight,
-                        width = binding.cropPreview.measuredWidth
-                    )
+                // Wait for PhotoView to finish layout
+                binding.cropPreview.post {
+                    getCorners(true, {
+                        // Use bitmap dimensions, not view dimensions
+                        // Corners are in bitmap coordinate space
+                        binding.cropCornerDetector.onCorners(
+                            corners = it,
+                            height = image.height,
+                            width = image.width
+                        )
 
-                    binding.sourceFrame.post {
-                        checkAndGetPolygonPoints(image, { points ->
-                            binding.polygonView.points = points
-                            binding.polygonView.visibility = View.VISIBLE
+                        binding.sourceFrame.post {
+                            checkAndGetPolygonPoints(image, { pointsInBitmapCoords ->
+                                // Scale points from bitmap coordinates to view coordinates
+                                val displayRect = binding.cropPreview.displayRect
+                                val scaleX = displayRect.width() / image.width
+                                val scaleY = displayRect.height() / image.height
 
-                            val padding =
-                                resources.getDimension(com.identify.sdk.R.dimen.scanPadding).toInt()
-                            val layoutParams = FrameLayout.LayoutParams(
-                                getPhotoViewWidth() + 2 * padding,
-                                getPhotoViewHeight() + 2 * padding
-                            )
-                            layoutParams.gravity = Gravity.CENTER
-                            binding.polygonView.layoutParams = layoutParams
+                                val scaledPoints = pointsInBitmapCoords.mapValues { entry ->
+                                    android.graphics.PointF(
+                                        entry.value.x * scaleX + displayRect.left,
+                                        entry.value.y * scaleY + displayRect.top
+                                    )
+                                }.toMutableMap()
 
+                                binding.polygonView.points = scaledPoints
+                                binding.polygonView.visibility = View.VISIBLE
 
-                            /**
-                             * To use this condition, you must set the setStatusOfAutoCrop function true in the initialize phase.
-                             */
-                            if(SdkApp.identityOptions?.getAutoCropStatus() == true){
-                                binding.confirmCropPreview.performClick()
-                                binding.cropResultWrap.visibility = View.VISIBLE
-                            }
-                        }, { errorType ->
-                            onError(errorType)
-                        })
-                    }
-                }, { cropErrorType ->
-                    onError(cropErrorType)
-                })
+                                val padding =
+                                    resources.getDimension(com.identify.sdk.R.dimen.scanPadding).toInt()
+                                val layoutParams = FrameLayout.LayoutParams(
+                                    getPhotoViewWidth() + 2 * padding,
+                                    getPhotoViewHeight() + 2 * padding
+                                )
+                                layoutParams.gravity = Gravity.CENTER
+                                binding.polygonView.layoutParams = layoutParams
+
+                                /**
+                                 * To use this condition, you must set the setStatusOfAutoCrop function true in the initialize phase.
+                                 */
+                                if(SdkApp.identityOptions?.getAutoCropStatus() == true){
+                                    binding.confirmCropPreview.performClick()
+                                    binding.cropResultWrap.visibility = View.VISIBLE
+                                }
+                            }, { errorType ->
+                                onError(errorType)
+                            })
+                        }
+                    }, { cropErrorType ->
+                        onError(cropErrorType)
+                    })
+                }
             }
         }
 
@@ -219,23 +237,28 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
     private fun handleError(reason : Reason){
         when(reason){
             is ApiError -> {
-                Toasty.error(requireContext(), reason.message?.get(0).toString(), Toasty.LENGTH_SHORT, true).show()
+                android.util.Log.e("CropFrontFragment", "ApiError: statusCode=${reason.statusCode}, message=${reason.message}")
+                // Message is already parsed in ViewModel (409 errors parsed via ErrorBodyParser)
+                val errorMessage = reason.message?.getOrNull(0) ?: "Unknown error"
+                Toasty.error(requireContext(), errorMessage, Toasty.LENGTH_SHORT, true).show()
                 takePhotoAgain()
             }
             is ResponseError -> {
+                android.util.Log.e("CropFrontFragment", "ResponseError occurred")
                 Toasty.error(requireContext(), getResponseErrorMessage(), Toasty.LENGTH_SHORT, true).show()
             }
             is SocketConnectionError -> {
+                android.util.Log.e("CropFrontFragment", "SocketConnectionError occurred")
                 Toasty.error(requireContext(), getSocketConnectionErrorMessage(), Toasty.LENGTH_SHORT, true).show()
             }
             is TimeoutError -> {
+                android.util.Log.e("CropFrontFragment", "TimeoutError occurred")
                 Toasty.error(requireContext(), getTimeoutErrorMessage(), Toasty.LENGTH_SHORT, true).show()
             }
             is ApiComparisonError -> {
-                //Toasty.error(requireContext(), reason.message?.get(0).toString(), Toasty.LENGTH_SHORT, true).show()
+                android.util.Log.e("CropFrontFragment", "ApiComparisonError: message=${reason.message}")
                 Toasty.error(requireContext(), getString(R.string.comparison_error), Toasty.LENGTH_SHORT, true).show()
                 checkAndHandleComparisonErrorState()
-                //takePhotoAgain()
             }
         }
     }
@@ -276,6 +299,8 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
 
     private fun getSocketConnectionErrorMessage(): String = getString(R.string.reason_socket_connection)
     private fun getCropErrorMessage(): String? = getString(R.string.crop_error)
+
+    private fun getPhotoUploadLimitError(): String = getString(R.string.photo_upload_limit_error)
 
     private fun getIdCouldNotDetectedErrorMessage() = getString(R.string.id_not_detected)
     override fun getPhotoViewWidth(): Int = binding.cropPreview.measuredWidth

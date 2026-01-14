@@ -190,4 +190,6 @@
     <string name="skip_next_module">Növbəti modula keçin</string>
 
     <string name="comparison_error">Şəxsiyyət məlumatlarının müqayisəsi nəticəsi yanlışdır.</string>
+
+    <string name="waiting_final_preparations">Müştəri təmsilçimiz sizi aramaq üçün son hazırlıqlarını edir. Zəhmət olmasa, tətbiqi bağlamadan gözləyin.</string>
 </resources>
