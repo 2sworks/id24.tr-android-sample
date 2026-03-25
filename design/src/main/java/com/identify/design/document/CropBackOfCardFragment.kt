@@ -152,6 +152,9 @@ class CropBackOfCardFragment: BaseCropBackOfFragment() {
         }
 
         binding.confirmCropPreview.setOnClickListener {
+            // Async işlem süresince geri dönüşü engelle (crash önleme)
+            binding.closeCropPreview.isClickable = false
+            binding.closeCropPreview.isEnabled = false
 
             binding.cropPreview.visibility = View.GONE
             binding.cropWrap.visibility = View.GONE
@@ -171,11 +174,15 @@ class CropBackOfCardFragment: BaseCropBackOfFragment() {
                         idBackCompletedBitmap = bitmap
                         binding.cropResultPreview.setImageBitmap(idBackCompletedBitmap)
                         binding.cropResultPreview.scaleType = ImageView.ScaleType.FIT_CENTER
+                        binding.closeCropPreview.isClickable = true
+                        binding.closeCropPreview.isEnabled = true
 
                         hideProgress()
                     }
 
                     override fun onFailure(cropErrorType: CropErrorType) {
+                        binding.closeCropPreview.isClickable = true
+                        binding.closeCropPreview.isEnabled = true
                         onError(cropErrorType)
                         hideProgress()
                     }

@@ -57,16 +57,20 @@ class ScanFrontOfCardFragment : BaseScanFrontOfCardFragment() {
     }
 
     private val takeCardPhotoOnClickListener = View.OnClickListener {
+        binding.shutter.isClickable = false
+        binding.shutter.isEnabled = false
         binding.rlHoldSteady.visibility = View.VISIBLE
 
         takePhoto(true, object : TakePhotoListener {
             override fun onSuccess(photo: Uri) {
-                goToFrontCropPage(photo) //
+                goToFrontCropPage(photo)
                 onStop()
             }
 
             override fun onFailure(throwable: Throwable) {
-                Log.e(ScanFrontOfCardFragment::class.java.simpleName, throwable.message, throwable) //
+                Log.e(ScanFrontOfCardFragment::class.java.simpleName, throwable.message, throwable)
+                binding.shutter.isClickable = true
+                binding.shutter.isEnabled = true
             }
 
         })

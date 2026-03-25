@@ -40,8 +40,6 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
     override fun onStart() {
         super.onStart()
 
-        observeDataChanges()
-
         binding.cropPreview.setOnTouchListener { view: View, motionEvent: MotionEvent ->
             view.performClick()
             binding.cropCornerDetector.onTouch(motionEvent)!!
@@ -120,6 +118,8 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeDataChanges()
+
         binding.rotateImage.setOnClickListener {
             rotateImage(ROTATE_DEGREE)
         }
@@ -137,6 +137,9 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
         }
 
         binding.confirmCropPreview.setOnClickListener {
+            // Async işlem süresince geri dönüşü engelle (crash önleme)
+            binding.closeCropPreview.isClickable = false
+            binding.closeCropPreview.isEnabled = false
 
             binding.cropPreview.visibility = View.GONE
             binding.cropWrap.visibility = View.GONE
@@ -157,6 +160,8 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
                         binding.cropResultPreview.setImageBitmap(idFrontCompletedBitmap)
                         binding.cropResultPreview.scaleType = ImageView.ScaleType.FIT_CENTER
                         hideProgress()
+                        binding.closeCropPreview.isClickable = true
+                        binding.closeCropPreview.isEnabled = true
                     }
                 } else {
                     faceControlForValidate(croppedBitmap,object : RotateListener {
@@ -166,11 +171,15 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
                             idFrontCompletedBitmap = bitmap
                             binding.cropResultPreview.setImageBitmap(idFrontCompletedBitmap)
                             binding.cropResultPreview.scaleType = ImageView.ScaleType.FIT_CENTER
+                            binding.closeCropPreview.isClickable = true
+                            binding.closeCropPreview.isEnabled = true
 
                             hideProgress()
                         }
 
                         override fun onFailure(cropErrorType: CropErrorType) {
+                            binding.closeCropPreview.isClickable = true
+                            binding.closeCropPreview.isEnabled = true
                             onError(cropErrorType)
                             hideProgress()
                         }

@@ -42,6 +42,8 @@ class ScanBackOfCardFragment : BaseScanBackOfCardFragment() {
     }
 
     private val takeCardPhotoOnClickListener = View.OnClickListener {
+        binding.shutter.isClickable = false
+        binding.shutter.isEnabled = false
         binding.rlHoldSteady.visibility = View.VISIBLE
 
         takePhoto(true, object : TakePhotoListener {
@@ -51,7 +53,9 @@ class ScanBackOfCardFragment : BaseScanBackOfCardFragment() {
             }
 
             override fun onFailure(throwable: Throwable) {
-                Log.e(ScanFrontOfCardFragment::class.java.simpleName, throwable.message, throwable) //
+                Log.e(ScanBackOfCardFragment::class.java.simpleName, throwable.message, throwable)
+                binding.shutter.isClickable = true
+                binding.shutter.isEnabled = true
             }
 
         })
