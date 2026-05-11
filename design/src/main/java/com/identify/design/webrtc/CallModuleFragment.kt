@@ -7,8 +7,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.identify.design.R
 import com.identify.design.databinding.FragmentCallModuleBinding
 import com.identify.design.dialogs.InformationDialogFragment
+import com.identify.design.dialogs.NfcMissingDataBottomDialogFragment
 import com.identify.design.dialogs.NfcWhenCallingBottomDialogFragment
-import com.identify.design.nfc.CheckIdentityInformationFragment
 import com.identify.design.webrtc.calling.CallingFragment
 import com.identify.design.webrtc.started.StartedCallFragment
 import com.identify.design.webrtc.wait.CallWaitingFragment
@@ -30,7 +30,7 @@ class CallModuleFragment : BaseCallModuleFragment() {
 
     override fun getNfcWhenCallingBottomDialogFragment(): BottomSheetDialogFragment? = NfcWhenCallingBottomDialogFragment.newInstance()
 
-    override fun getCheckIdentityInformationFragmentInstance(): DialogFragment? = CheckIdentityInformationFragment.newInstance()
+    override fun getNfcMissingDataFragmentInstance(): DialogFragment? = NfcMissingDataBottomDialogFragment.newInstance()
 
     override fun getMissedCallFragmentInstance(): Fragment? = MissedCallFragment.newInstance()
 

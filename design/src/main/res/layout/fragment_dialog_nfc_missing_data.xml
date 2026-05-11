@@ -1,89 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_dialog_sheet_top"
+    android:paddingBottom="20dp">
 
+    <!-- Drag handle -->
+    <View
+        android:layout_width="44dp"
+        android:layout_height="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/bg_dialog_handle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Header: title -->
     <TextView
         android:id="@+id/tvMissingDataTitle"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingStart="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/nexa_slab_bold"
-        android:text="@string/missing_information" />
+        android:gravity="start"
+        android:text="@string/missing_information"
+        android:textColor="#1A1F2C"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tvMissingDataMessage"
-        android:layout_width="match_parent"
+    <!-- Warning banner -->
+    <LinearLayout
+        android:id="@+id/warningBanner"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:paddingStart="10dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_warning_banner"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingHorizontal="14dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvMissingDataTitle">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_warning_amber" />
+
+        <TextView
+            android:id="@+id/tvMissingDataMessage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:lineSpacingExtra="2dp"
+            android:text="@string/verify_data_below"
+            android:textColor="#7A5A0A"
+            android:textSize="13sp" />
+    </LinearLayout>
+
+    <!-- Field: Serial Number -->
+    <TextView
+        android:id="@+id/lblSerialNumber"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/nexa_slab_bold"
-        android:layout_marginTop="10dp"
-        android:text="@string/verify_data_below"
-        android:layout_below="@id/tvMissingDataTitle"/>
+        android:text="@string/id_serial_no"
+        android:textColor="#4A5260"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/warningBanner" />
 
     <EditText
         android:id="@+id/etSerialNumber"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_input_field_outline"
+        android:fontFamily="@font/nunito_sans_regular"
         android:hint="@string/id_serial_no"
-        android:paddingStart="20dp"
         android:imeOptions="actionNext"
-        android:singleLine="true"
+        android:inputType="textCapCharacters"
         android:nextFocusDown="@id/tvDateOfBirth"
-        android:textSize="16sp"
-        android:fontFamily="@font/nexa_slab_bold"
-        android:layout_below="@id/tvMissingDataMessage"
-        android:background="@drawable/edittext_border_bg"/>
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:singleLine="true"
+        android:textColor="#1A1F2C"
+        android:textColorHint="#9DA3AC"
+        android:textSize="15sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblSerialNumber" />
 
+    <!-- Field: Date of Birth -->
     <TextView
-        android:id="@+id/tvDateOfBirth"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:hint="@string/birth_day"
-        android:gravity="center_vertical"
-        android:textSize="16sp"
+        android:id="@+id/lblDateOfBirth"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
         android:fontFamily="@font/nexa_slab_bold"
-        android:paddingStart="20dp"
-        android:nextFocusDown="@id/tvExpiryDate"
-        android:layout_marginTop="15dp"
-        android:layout_below="@id/etSerialNumber"
-        android:background="@drawable/edittext_border_bg"/>
+        android:text="@string/birth_day"
+        android:textColor="#4A5260"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etSerialNumber" />
 
-    <TextView
-        android:id="@+id/tvExpiryDate"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="15dp"
-        android:gravity="center_vertical"
-        android:hint="@string/card_expiry_date"
-        android:fontFamily="@font/nexa_slab_bold"
-        android:textSize="16sp"
-        android:paddingStart="20dp"
-        android:layout_below="@id/tvDateOfBirth"
-        android:background="@drawable/edittext_border_bg"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cvUpdate"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_horizontal"
-        android:elevation="2dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_below="@id/tvExpiryDate">
+    <FrameLayout
+        android:id="@+id/birthFrame"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_input_field_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblDateOfBirth">
 
         <TextView
+            android:id="@+id/tvDateOfBirth"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fontFamily="@font/nexa_slab_bold"
-            android:gravity="center"
-            android:text="@string/update"
-            android:textColor="@color/colorDarkBlue" />
+            android:fontFamily="@font/nunito_sans_regular"
+            android:gravity="center_vertical"
+            android:hint="@string/birth_day"
+            android:nextFocusDown="@id/tvExpiryDate"
+            android:paddingStart="16dp"
+            android:paddingEnd="48dp"
+            android:textColor="#1A1F2C"
+            android:textColorHint="#9DA3AC"
+            android:textSize="15sp" />
 
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_calendar_field" />
+    </FrameLayout>
+
+    <!-- Field: Expiry Date -->
+    <TextView
+        android:id="@+id/lblExpiryDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/nexa_slab_bold"
+        android:text="@string/card_expiry_date"
+        android:textColor="#4A5260"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/birthFrame" />
+
+    <FrameLayout
+        android:id="@+id/expiryFrame"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bg_input_field_outline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblExpiryDate">
+
+        <TextView
+            android:id="@+id/tvExpiryDate"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nunito_sans_regular"
+            android:gravity="center_vertical"
+            android:hint="@string/card_expiry_date"
+            android:paddingStart="16dp"
+            android:paddingEnd="48dp"
+            android:textColor="#1A1F2C"
+            android:textColorHint="#9DA3AC"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@null"
+            android:src="@drawable/ic_calendar_field" />
+    </FrameLayout>
+
+    <!-- Primary CTA: Update -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvUpdate"
+        android:layout_width="0dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:cardCornerRadius="40dp"
+        app:cardElevation="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/expiryFrame">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/main_button_bg">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nexa_slab_bold"
+                android:letterSpacing="0.04"
+                android:text="@string/update"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="14sp" />
+        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

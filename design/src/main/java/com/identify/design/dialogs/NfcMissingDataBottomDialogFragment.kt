@@ -22,6 +22,8 @@ class NfcMissingDataBottomDialogFragment:BaseNfcMissingDataBottomDialogFragment(
 
     override fun getValidUntilErrorMessage(): String = getString(R.string.expiry_day_error)
 
+    override fun getManualEntryErrorMessage(): String = getString(R.string.nfc_try_again)
+
     companion object {
 
         @JvmStatic
