@@ -55,6 +55,9 @@ class IdentifyActivity : BaseIdentifyActivity<ActivityIdentifyBinding>() {
 
     override fun getSignatureModuleFragmentInstance(): Fragment? = SignatureModuleFragment.newInstance()
 
+    override fun getSelfieWithLivenessModuleFragmentInstance(): Fragment? =
+        com.identify.design.selfiewithliveness.SelfieWithLivenessModuleFragment.newInstance()
+
     override fun getPermissionFragmentInstance(): Fragment? = PermissionFragment.newInstance()
 
 

@@ -197,4 +197,36 @@
 
     <string name="waiting_final_preparations">Müşteri temsilcimiz sizi aramak için son hazırlıkları yapıyor. Lütfen uygulamayı kapatmadan bekleyin.</string>
     <string name="photo_upload_limit_error">Bu ident_id ile maksimum 20 fotoğraf yükleyebilirsiniz.</string>
+
+    <string name="selfie_with_liveness_title">Canlı Selfie</string>
+    <string name="selfie_with_liveness_info">Yüzünü oval çerçeveye yerleştir ve ekrandaki komutları takip et.</string>
+    <string name="selfie_with_liveness_align">Yüzünü ovalin içine yerleştir</string>
+    <string name="selfie_with_liveness_move_closer">Biraz yaklaş</string>
+    <string name="selfie_with_liveness_move_farther">Biraz uzaklaş</string>
+    <string name="selfie_with_liveness_center">Yüzünü merkeze al</string>
+    <string name="selfie_with_liveness_move_left">Hafifçe sola kay</string>
+    <string name="selfie_with_liveness_move_right">Hafifçe sağa kay</string>
+    <string name="selfie_with_liveness_move_up">Başını hafifçe yukarı kaldır</string>
+    <string name="selfie_with_liveness_move_down">Başını hafifçe aşağı indir</string>
+    <string name="selfie_with_liveness_no_face">Yüz algılanmıyor</string>
+    <string name="selfie_with_liveness_too_dark">Ortam çok karanlık — daha aydınlık bir yere geç</string>
+    <string name="selfie_with_liveness_too_bright">Ortam çok parlak — direkt ışıktan uzaklaş</string>
+    <string name="selfie_with_liveness_eyes_closed">Gözlerini aç ve kameraya bak</string>
+    <string name="selfie_with_liveness_challenge_blink">Göz kırp</string>
+    <string name="selfie_with_liveness_challenge_turn_left">Başını sola çevir</string>
+    <string name="selfie_with_liveness_challenge_turn_right">Başını sağa çevir</string>
+    <string name="selfie_with_liveness_challenge_nod">Başını hafifçe aşağı indir</string>
+    <string name="selfie_with_liveness_challenge_closer">Kameraya biraz yaklaş</string>
+    <string name="selfie_with_liveness_success">Başarılı</string>
+    <string name="selfie_with_liveness_processing">İşleniyor…</string>
+    <string name="selfie_with_liveness_failed">Canlılık kontrolü başarısız — tekrar dene</string>
+    <string name="selfie_with_liveness_hold_countdown">Sabit tut… %1$d</string>
+    <string name="selfie_with_liveness_face_camera">Yüzünü kameraya doğru çevir</string>
+    <string name="selfie_with_liveness_retry_title">İşlem Tamamlanamadı</string>
+    <string name="selfie_with_liveness_retry_item_1">Yüzünüzün net ve tam olarak göründüğünden emin olun.</string>
+    <string name="selfie_with_liveness_retry_item_2">Kimlik sahibi kişinin işlemi gerçekleştirdiğinden emin olun.</string>
+    <string name="selfie_with_liveness_retry_item_3">Yeterli ışık bulunan bir ortamda çekim yapın.</string>
+    <string name="selfie_with_liveness_final_failure_title">İşleminiz Başarısız</string>
+    <string name="selfie_with_liveness_final_failure_message">İşleminiz başarısız oldu.</string>
+    <string name="try_again">Tekrar Dene</string>
 </resources>

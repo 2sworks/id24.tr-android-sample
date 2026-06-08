@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="24dp"
+    android:background="@drawable/bg_dialog_white_rounded"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="28dp"
+    android:paddingBottom="24dp">
+
+    <TextView
+        android:id="@+id/tvDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nexa_slab_bold"
+        android:gravity="center"
+        android:text="@string/selfie_with_liveness_final_failure_title"
+        android:textColor="@color/textColor"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/nunito_sans_regular"
+        android:gravity="center"
+        android:text="@string/selfie_with_liveness_final_failure_message"
+        android:textColor="@color/textColor"
+        android:textSize="14sp" />
+
+    <FrameLayout
+        android:id="@+id/btnFinish"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/bg_button_dialog_primary"
+        android:clickable="true"
+        android:focusable="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/nexa_slab_bold"
+            android:text="@string/finish"
+            android:textColor="@android:color/white"
+            android:textSize="14sp" />
+    </FrameLayout>
+</LinearLayout>

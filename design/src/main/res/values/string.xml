@@ -197,4 +197,36 @@ sag das Wort auf dem Bild</string>
     <string name="comparison_error">Kimlik bilgileri karşılaştırma sonucu yanlış.</string>
     <string name="waiting_final_preparations">Unser Kundenvertreter trifft die letzten Vorbereitungen, um Sie anzurufen. Bitte warten Sie, ohne die App zu schließen.</string>
     <string name="photo_upload_limit_error">Sie können maximal 20 Fotos mit dieser ident_id hochladen.</string>
+
+    <string name="selfie_with_liveness_title">Selfie with Liveness</string>
+    <string name="selfie_with_liveness_info">Place your face inside the oval frame and follow the on-screen instructions.</string>
+    <string name="selfie_with_liveness_align">Place your face inside the oval</string>
+    <string name="selfie_with_liveness_move_closer">Move a little closer</string>
+    <string name="selfie_with_liveness_move_farther">Move a little farther</string>
+    <string name="selfie_with_liveness_center">Center your face</string>
+    <string name="selfie_with_liveness_move_left">Move slightly left</string>
+    <string name="selfie_with_liveness_move_right">Move slightly right</string>
+    <string name="selfie_with_liveness_move_up">Lift your head slightly</string>
+    <string name="selfie_with_liveness_move_down">Lower your head slightly</string>
+    <string name="selfie_with_liveness_no_face">No face detected</string>
+    <string name="selfie_with_liveness_too_dark">Lighting is too dark — move to a brighter spot</string>
+    <string name="selfie_with_liveness_too_bright">Lighting is too bright — move away from direct light</string>
+    <string name="selfie_with_liveness_eyes_closed">Open your eyes and look at the camera</string>
+    <string name="selfie_with_liveness_challenge_blink">Blink</string>
+    <string name="selfie_with_liveness_challenge_turn_left">Turn your head left</string>
+    <string name="selfie_with_liveness_challenge_turn_right">Turn your head right</string>
+    <string name="selfie_with_liveness_challenge_nod">Lower your head slightly</string>
+    <string name="selfie_with_liveness_challenge_closer">Move closer to the camera</string>
+    <string name="selfie_with_liveness_success">Successful</string>
+    <string name="selfie_with_liveness_processing">Processing…</string>
+    <string name="selfie_with_liveness_failed">Selfie with liveness check failed — please try again</string>
+    <string name="selfie_with_liveness_hold_countdown">Hold still… %1$d</string>
+    <string name="selfie_with_liveness_face_camera">Face the camera directly</string>
+    <string name="selfie_with_liveness_retry_title">Process Could Not Be Completed</string>
+    <string name="selfie_with_liveness_retry_item_1">Make sure your face is clearly and fully visible.</string>
+    <string name="selfie_with_liveness_retry_item_2">Make sure the operation is performed by the ID holder.</string>
+    <string name="selfie_with_liveness_retry_item_3">Take the photo in a well-lit environment.</string>
+    <string name="selfie_with_liveness_final_failure_title">Your Verification Failed</string>
+    <string name="selfie_with_liveness_final_failure_message">Your verification has failed.</string>
+    <string name="try_again">Try Again</string>
 </resources>
