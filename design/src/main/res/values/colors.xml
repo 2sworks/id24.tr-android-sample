@@ -40,4 +40,9 @@
 	<color name="colorBlackFortyPercentAlpha">#66000000</color>
 	<color name="button_text_color">#3447D6</color>
 
+	<!-- SelfieWithLiveness -->
+	<color name="selfie_with_liveness_dot_success">#3DDC84</color>
+	<color name="selfie_with_liveness_dot_neutral">#EBFFFFFF</color>
+	<color name="selfie_with_liveness_green_accent">#4CAF50</color>
+
 </resources>

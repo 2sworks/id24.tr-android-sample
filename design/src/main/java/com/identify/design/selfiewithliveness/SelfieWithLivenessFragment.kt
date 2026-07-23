@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import androidx.camera.view.PreviewView
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnLayout
 import com.identify.design.R
 import com.identify.design.databinding.FragmentSelfieWithLivenessBinding
@@ -28,6 +29,10 @@ import com.identify.sdk.selfiewithliveness.analysis.AlignmentState
 class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithLivenessCallback {
 
     private val binding by viewBinding(FragmentSelfieWithLivenessBinding::bind)
+
+    private val dotColorSuccess get() = ContextCompat.getColor(requireContext(), R.color.selfie_with_liveness_dot_success)
+    private val dotColorNeutral get() = ContextCompat.getColor(requireContext(), R.color.selfie_with_liveness_dot_neutral)
+    private val greenAccent get() = ContextCompat.getColor(requireContext(), R.color.selfie_with_liveness_green_accent)
 
     override fun getLayoutRes(): Int = R.layout.fragment_selfie_with_liveness
 
@@ -69,13 +74,13 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
             SelfieWithLivenessState.Processing -> {
                 binding.tvInstruction.text = getString(R.string.selfie_with_liveness_processing)
                 // Processing — yüz hizalanmıştı, dot rengini yeşil tut.
-                binding.meshOverlay.setDotColor(DOT_COLOR_SUCCESS)
-                binding.ovalBackground.setBorderColor(GREEN_ACCENT)
+                binding.meshOverlay.setDotColor(dotColorSuccess)
+                binding.ovalBackground.setBorderColor(greenAccent)
             }
             is SelfieWithLivenessState.Success -> {
                 binding.tvInstruction.text = getString(R.string.selfie_with_liveness_success)
-                binding.meshOverlay.setDotColor(DOT_COLOR_SUCCESS)
-                binding.ovalBackground.setBorderColor(GREEN_ACCENT)
+                binding.meshOverlay.setDotColor(dotColorSuccess)
+                binding.ovalBackground.setBorderColor(greenAccent)
             }
             is SelfieWithLivenessState.Failed -> {
                 binding.tvInstruction.text = getString(R.string.selfie_with_liveness_failed)
@@ -112,7 +117,7 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
         binding.tvInstruction.text = getString(textRes)
         // Hizalama bozulduğunda noktalar ve oval beyaz state'e geri döner — komut göstermek için.
         binding.ovalBackground.setBorderColor(Color.WHITE)
-        binding.meshOverlay.setDotColor(DOT_COLOR_NEUTRAL)
+        binding.meshOverlay.setDotColor(dotColorNeutral)
     }
 
     private fun renderHolding(state: SelfieWithLivenessState.Holding) {
@@ -120,8 +125,8 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
         // Saniyeyi yukarı yuvarla (3, 2, 1) — kullanıcı net countdown görür.
         val secondsLeft = ((state.remainingMs + 999L) / 1000L).coerceAtLeast(1L).toInt()
         binding.tvInstruction.text = getString(R.string.selfie_with_liveness_hold_countdown, secondsLeft)
-        binding.ovalBackground.setBorderColor(GREEN_ACCENT)
-        binding.meshOverlay.setDotColor(DOT_COLOR_SUCCESS)
+        binding.ovalBackground.setBorderColor(greenAccent)
+        binding.meshOverlay.setDotColor(dotColorSuccess)
     }
 
     override fun showProgress() {
@@ -163,11 +168,6 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
     }
 
     companion object {
-        // Reference design: bright lime green, full opacity — yüz tonu üstünde net görünür.
-        private val DOT_COLOR_SUCCESS = Color.parseColor("#3DDC84")
-        private val DOT_COLOR_NEUTRAL = Color.argb(235, 255, 255, 255)
-        private val GREEN_ACCENT = Color.parseColor("#4CAF50")
-
         @JvmStatic
         fun newInstance() = SelfieWithLivenessFragment()
     }
