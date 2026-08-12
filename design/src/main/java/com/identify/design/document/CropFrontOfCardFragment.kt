@@ -248,8 +248,12 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
             is ApiError -> {
                 android.util.Log.e("CropFrontFragment", "ApiError: statusCode=${reason.statusCode}, message=${reason.message}")
                 // Message is already parsed in ViewModel (409 errors parsed via ErrorBodyParser)
-                val errorMessage = reason.message?.getOrNull(0) ?: "Unknown error"
-                Toasty.error(requireContext(), errorMessage, Toasty.LENGTH_SHORT, true).show()
+                if (reason.statusCode == 429) {
+                    Toasty.error(requireContext(), getTooManyRequestsError(), Toasty.LENGTH_SHORT, true).show()
+                } else {
+                    val errorMessage = reason.message?.getOrNull(0) ?: "Unknown error"
+                    Toasty.error(requireContext(), errorMessage, Toasty.LENGTH_SHORT, true).show()
+                }
                 takePhotoAgain()
             }
             is ResponseError -> {
@@ -310,6 +314,8 @@ class CropFrontOfCardFragment : BaseCropFrontOfCardFragment() {
     private fun getCropErrorMessage(): String? = getString(R.string.crop_error)
 
     private fun getPhotoUploadLimitError(): String = getString(R.string.photo_upload_limit_error)
+
+    private fun getTooManyRequestsError(): String = getString(R.string.too_many_requests)
 
     private fun getIdCouldNotDetectedErrorMessage() = getString(R.string.id_not_detected)
     override fun getPhotoViewWidth(): Int = binding.cropPreview.measuredWidth

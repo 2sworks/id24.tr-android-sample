@@ -19,12 +19,12 @@ import com.identify.design.util.showProgressDialog
 import com.identify.sdk.base.viewBinding.viewBinding
 import com.identify.sdk.selfiewithliveness.BaseSelfieWithLivenessFragment
 import com.identify.sdk.selfiewithliveness.SelfieWithLivenessCallback
+import com.identify.sdk.selfiewithliveness.SelfieWithLivenessPhase
 import com.identify.sdk.selfiewithliveness.SelfieWithLivenessState
 import com.identify.sdk.selfiewithliveness.analysis.AlignmentState
 
 /**
- * Face verification modülünün UI katmanı. Tüm iş mantığı SDK'da —
- * bu class sadece callback'e subscribe olup view'leri günceller.
+ * Face verification modülünün UI katmanı
  */
 class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithLivenessCallback {
 
@@ -40,6 +40,18 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
 
     override fun getCallback(): SelfieWithLivenessCallback = this
 
+    /** Büyük (ikinci faz) oval — view-space piksel. */
+    private var bigOvalRect: RectF? = null
+
+    /** Küçük (birinci faz) oval — view-space piksel. SDK'daki alignment ovaliyle birebir. */
+    private var smallOvalRect: RectF? = null
+
+    /** Şu an gösterilen faz — sadece faz değişince animasyon tetiklemek için. */
+    private var shownPhase: SelfieWithLivenessPhase? = null
+
+    /** Küçük→büyük geçişteki yeşil onay animasyonu sürüyor mu (beyaz override'ları engelle). */
+    private var confirming = false
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.closeButton.setOnClickListener { onBackPressFromUi() }
@@ -47,17 +59,51 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
     }
 
     private fun setupOvalForLayout() {
-        val normalized = ovalRectNormalized()
         val root = binding.root
         val w = root.width.toFloat()
         val h = root.height.toFloat()
-        val ovalRectView = RectF(
-            normalized.left * w,
-            normalized.top * h,
-            normalized.right * w,
-            normalized.bottom * h,
-        )
-        binding.ovalBackground.setOvalRect(ovalRectView)
+        // Küçük ve büyük ovalleri SDK'nın verdiği normalize rect'lerden hesapla ki
+        // çizilen oval ile alignment'ın kullandığı oval birebir aynı olsun.
+        bigOvalRect = ovalRectNormalized().toViewRect(w, h)
+        smallOvalRect = smallOvalRectNormalized().toViewRect(w, h)
+
+        // Başlangıçta birinci faz → küçük oval.
+        shownPhase = SelfieWithLivenessPhase.SMALL
+        binding.ovalBackground.setOvalRect(smallOvalRect)
+    }
+
+    private fun RectF.toViewRect(w: Float, h: Float) =
+        RectF(left * w, top * h, right * w, bottom * h)
+
+    /**
+     * Aktif faza göre oval'ı gösterir. Küçük→büyük geçişte iki çizgi de yeşil olur,
+     * oval büyür, ardından büyük faz için beyaza döner.
+     * Aynı fazda tekrar çağrılırsa no-op.
+     */
+    private fun applyPhase(phase: SelfieWithLivenessPhase) {
+        if (shownPhase == phase) return
+
+        if (shownPhase == SelfieWithLivenessPhase.SMALL && phase == SelfieWithLivenessPhase.BIG) {
+            // Küçük oval doğrulaması bitti → progress full + iki çizgi yeşil + büyüme.
+            shownPhase = SelfieWithLivenessPhase.BIG
+            val big = bigOvalRect ?: return
+            confirming = true
+            binding.ovalBackground.setProgress(1f)
+            binding.ovalBackground.setBorderColor(greenAccent)
+            binding.ovalBackground.animateOvalTo(big)
+            binding.root.postDelayed({
+                if (!isAdded || view == null) return@postDelayed
+                // Büyük faz hold'u için beyaza dön, progress'i sıfırla.
+                confirming = false
+                binding.ovalBackground.setBorderColor(Color.WHITE)
+                binding.ovalBackground.setProgress(0f)
+            }, CONFIRM_HOLD_MS)
+            return
+        }
+
+        shownPhase = phase
+        val target = if (phase == SelfieWithLivenessPhase.SMALL) smallOvalRect else bigOvalRect
+        target?.let { binding.ovalBackground.animateOvalTo(it) }
     }
 
     private fun onBackPressFromUi() {
@@ -72,13 +118,15 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
             is SelfieWithLivenessState.Aligning -> renderAligning(state)
             is SelfieWithLivenessState.Holding -> renderHolding(state)
             SelfieWithLivenessState.Processing -> {
-                binding.tvInstruction.text = getString(R.string.selfie_with_liveness_processing)
-                // Processing — yüz hizalanmıştı, dot rengini yeşil tut.
+                // Büyük faz da tamamlandı → progress full + iki çizgi yeşil, son görüntü çekiliyor.
+                binding.ovalBackground.setProgress(1f)
+                binding.tvInstruction.text = getString(R.string.selfie_with_liveness_verified)
                 binding.meshOverlay.setDotColor(dotColorSuccess)
                 binding.ovalBackground.setBorderColor(greenAccent)
             }
             is SelfieWithLivenessState.Success -> {
-                binding.tvInstruction.text = getString(R.string.selfie_with_liveness_success)
+                binding.ovalBackground.setProgress(1f)
+                binding.tvInstruction.text = getString(R.string.selfie_with_liveness_verified)
                 binding.meshOverlay.setDotColor(dotColorSuccess)
                 binding.ovalBackground.setBorderColor(greenAccent)
             }
@@ -100,33 +148,32 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
     // ===== UI rendering helpers =====
 
     private fun renderAligning(state: SelfieWithLivenessState.Aligning) {
+        // Oval boyutu aktif faza göre (SMALL: küçük, BIG: büyük — animasyonlu geçiş).
+        applyPhase(state.phase)
+        if (confirming) return
+
         val textRes = when (state.result.state) {
             AlignmentState.NO_FACE -> R.string.selfie_with_liveness_no_face
-            AlignmentState.TOO_DARK -> R.string.selfie_with_liveness_too_dark
-            AlignmentState.TOO_BRIGHT -> R.string.selfie_with_liveness_too_bright
-            AlignmentState.EYES_CLOSED -> R.string.selfie_with_liveness_eyes_closed
             AlignmentState.TOO_FAR -> R.string.selfie_with_liveness_move_closer
             AlignmentState.TOO_CLOSE -> R.string.selfie_with_liveness_move_farther
-            AlignmentState.OFF_CENTER_LEFT -> R.string.selfie_with_liveness_move_right
-            AlignmentState.OFF_CENTER_RIGHT -> R.string.selfie_with_liveness_move_left
-            AlignmentState.OFF_CENTER_UP -> R.string.selfie_with_liveness_move_down
-            AlignmentState.OFF_CENTER_DOWN -> R.string.selfie_with_liveness_move_up
-            AlignmentState.FACE_NOT_FRONTAL -> R.string.selfie_with_liveness_face_camera
-            AlignmentState.ALIGNED -> R.string.selfie_with_liveness_align
+            else -> R.string.selfie_with_liveness_align
         }
         binding.tvInstruction.text = getString(textRes)
-        // Hizalama bozulduğunda noktalar ve oval beyaz state'e geri döner — komut göstermek için.
+
+        binding.ovalBackground.setProgress(0f)
         binding.ovalBackground.setBorderColor(Color.WHITE)
         binding.meshOverlay.setDotColor(dotColorNeutral)
     }
 
     private fun renderHolding(state: SelfieWithLivenessState.Holding) {
-        // Yüz hizalı, geri sayım çalışıyor.
-        // Saniyeyi yukarı yuvarla (3, 2, 1) — kullanıcı net countdown görür.
-        val secondsLeft = ((state.remainingMs + 999L) / 1000L).coerceAtLeast(1L).toInt()
-        binding.tvInstruction.text = getString(R.string.selfie_with_liveness_hold_countdown, secondsLeft)
-        binding.ovalBackground.setBorderColor(greenAccent)
-        binding.meshOverlay.setDotColor(dotColorSuccess)
+        // Yüz aktif ovalde sabit tutuluyor. Şartlar sağlandı → progress ring dolar.
+        applyPhase(state.phase)
+        if (confirming) return
+
+        binding.tvInstruction.text = getString(R.string.selfie_with_liveness_stay_still)
+        binding.ovalBackground.setProgress(state.progress)
+        binding.ovalBackground.setBorderColor(Color.WHITE)
+        binding.meshOverlay.setDotColor(dotColorNeutral)
     }
 
     override fun showProgress() {
@@ -147,10 +194,6 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
         showCustomDialog(R.layout.dialog_selfie_with_liveness_final_failure, R.id.btnFinish, onFinish)
     }
 
-    /**
-     * Standart AlertDialog yerine custom layout — başlık ortalı, maddelerde warning
-     * ikonu, maddeler arası boşluk, primary butonlu Colendi v3 stilinde dialog.
-     */
     private fun showCustomDialog(layoutRes: Int, buttonId: Int, onClick: () -> Unit) {
         val dialog = Dialog(requireContext())
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -168,6 +211,9 @@ class SelfieWithLivenessFragment : BaseSelfieWithLivenessFragment(), SelfieWithL
     }
 
     companion object {
+        /** Küçük→büyük geçişte yeşil onayın (iki çizgi yeşil + büyüme) ekranda kalma süresi. */
+        private const val CONFIRM_HOLD_MS = 500L
+
         @JvmStatic
         fun newInstance() = SelfieWithLivenessFragment()
     }
